@@ -1,4 +1,4 @@
-name: Manually Generate godoc
+name: Manually Generate godoc for  ${{ github.event.inputs.branchOrTag }}
 on:
   workflow_dispatch:
     inputs:
