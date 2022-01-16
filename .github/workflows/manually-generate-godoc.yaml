@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       branchOrTag:
-        description: The branch or tag to build.
+        description: The branch or tag of Chaos Mesh.
         required: true
         default: master
 
