@@ -22,3 +22,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./out/godoc/${{ github.event.inputs.branchOrTag }}
         destination_dir: godoc/${{ github.event.inputs.branchOrTag }}
+        enable_jekyll: true
