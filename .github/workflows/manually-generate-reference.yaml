@@ -1,0 +1,29 @@
+name: Manually Generate API Reference
+on:
+  workflow_dispatch:
+    inputs:
+      branchOrTag:
+        description: The branch or tag of Chaos Mesh.
+        required: true
+        default: master
+
+jobs:
+  godoc: 
+    name: "Generate API Reference for: ${{ github.event.inputs.branchOrTag }}"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: generate API Reference
+      run: |
+        mkdir -p out/reference
+        docker run -v $(pwd)/out/reference:/playground/out ghcr.io/strrl/chaos-mesh.dev-reference:latest ${{ github.event.inputs.branchOrTag }}
+    - name: change permission of these files
+      run: |
+        sudo chmod -R 755 out
+    - name: publish to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: out/reference/${{ github.event.inputs.branchOrTag }}
+        destination_dir: reference/${{ github.event.inputs.branchOrTag }}
+        disable_nojekyll: true
