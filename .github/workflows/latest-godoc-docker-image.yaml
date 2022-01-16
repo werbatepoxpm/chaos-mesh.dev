@@ -1,8 +1,11 @@
 name: Build Latest chaos-mesh.dev-godoc Docker Image
 
 on:
+  workflow_dispatch: {}
   push:
     branches: [ master ]
+    paths:
+    - image/chaos-mesh.dev-godoc/**
 
 jobs:
 
