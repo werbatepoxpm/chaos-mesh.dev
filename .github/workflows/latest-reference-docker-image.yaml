@@ -1,0 +1,25 @@
+name: Build Latest chaos-mesh.dev-reference Docker Image
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ master ]
+    paths:
+    - image/chaos-mesh.dev-reference/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Log in to GitHub Docker Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build the Docker image for reference
+      run: make image-reference
+    - name: Push docker image to ghcr.io
+      run: docker push ghcr.io/strrl/chaos-mesh.dev-reference:latest

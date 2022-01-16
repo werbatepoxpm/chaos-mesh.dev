@@ -15,8 +15,12 @@ clean:
 
 
 .PHONY: image
-image: image-godoc
+image: image-godoc image-reference
 
 .PHONY: image-godoc
 image-godoc: 
 	docker build -t ghcr.io/strrl/chaos-mesh.dev-godoc:latest ./image/chaos-mesh.dev-godoc
+
+.PHONY: image-reference
+image-reference: 
+	docker build -t ghcr.io/strrl/chaos-mesh.dev-reference:latest ./image/chaos-mesh.dev-reference
