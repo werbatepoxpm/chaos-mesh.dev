@@ -1,0 +1,24 @@
+name: Manually generate godoc
+on:
+  workflow_dispatch:
+    inputs:
+      branchOrTag:
+        description: The branch or tag to build.
+        required: true
+        default: master
+
+jobs:
+  godoc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: generate godoc
+      run: |
+        mkdir -p out/godoc
+        docker run -v $(shell pwd)/out/godoc:/playground/out ghcr.io/strrl/chaos-mesh.dev-godoc:latest ${{ github.event.inputs.branchOrTag }}
+    - name: publish to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out/godoc/${{ github.event.inputs.branchOrTag }}
+        destination_dir: godoc/${{ github.event.inputs.branchOrTag }}
