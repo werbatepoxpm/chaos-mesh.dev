@@ -1,4 +1,4 @@
-name: Manually generate godoc
+name: Manually Generate godoc
 on:
   workflow_dispatch:
     inputs:

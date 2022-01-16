@@ -1,4 +1,4 @@
-name: Latest Docker Image
+name: Build Latest chaos-mesh.dev-godoc Docker Image
 
 on:
   push:
