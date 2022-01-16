@@ -1,4 +1,4 @@
-name: Manually Generate godoc for  ${{ github.event.inputs.branchOrTag }}
+name: Manually Generate godoc
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +8,8 @@ on:
         default: master
 
 jobs:
-  godoc:
+  godoc: 
+    name: "Generate godoc for: ${{ github.event.inputs.branchOrTag }}"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
