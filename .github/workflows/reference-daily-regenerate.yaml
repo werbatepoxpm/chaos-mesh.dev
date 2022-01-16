@@ -1,0 +1,32 @@
+name: API Reference daily regenerate
+on:
+  schedule:
+  - cron: "10 0 * * *"
+  - cron: "22 0 * * *"
+
+jobs:
+  reference-for-branches:
+    strategy:
+      fail-fast: false
+      matrix:
+        active-branches:
+          - master
+          - release-2.1
+          - release-2.0
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: generate API Reference
+      run: |
+        mkdir -p out/reference
+        docker run -v $(pwd)/out/reference:/playground/out ghcr.io/strrl/chaos-mesh.dev-reference:latest ${{ matrix.active-branches }}
+    - name: change permission of these files
+      run: |
+        sudo chmod -R 755 out
+    - name: publish to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: out/reference/${{ matrix.active-branches }}
+        destination_dir: reference/${{ matrix.active-branches }}
+        disable_nojekyll: true
