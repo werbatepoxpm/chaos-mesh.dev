@@ -10,15 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate a sitemap
     steps:
-    - name: Checkout the repo
-      uses: actions/checkout@v2
-    - uses: fregante/setup-git-user@v1
-    - name: Generate sitemap
-      uses: cicirello/generate-sitemap@v1
-      with:
-        base-url-path: https://chaos-mesh.dev
-    - name: Push sitemap to repository
-      run: |
-        git add sitemap.xml
-        git commit -m "update sitemap"
-        git push
+    - name: placeholder on master
+      uses: mstachniuk/ci-skip@v1
