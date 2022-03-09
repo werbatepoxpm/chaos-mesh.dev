@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: setup git user as github-action
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "<41898282+github-actions[bot]@users.noreply.github.com>"
     - name: generate godoc
       run: |
         mkdir -p out/godoc
@@ -31,3 +27,5 @@ jobs:
         publish_dir: out/godoc/${{ github.event.inputs.branchOrTag }}
         destination_dir: godoc/${{ github.event.inputs.branchOrTag }}
         disable_nojekyll: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'

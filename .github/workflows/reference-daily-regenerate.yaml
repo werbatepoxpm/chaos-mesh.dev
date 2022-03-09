@@ -36,3 +36,5 @@ jobs:
         publish_dir: out/reference/${{ matrix.active-branches }}
         destination_dir: reference/${{ matrix.active-branches }}
         disable_nojekyll: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
