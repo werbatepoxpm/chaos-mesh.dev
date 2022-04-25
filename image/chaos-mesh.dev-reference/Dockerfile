@@ -1,4 +1,4 @@
-FROM golang:1.17
+FROM golang:1.18
 LABEL org.opencontainers.image.source=https://github.com/STRRL/chaos-mesh.dev
 
 RUN apt-get update && \ 

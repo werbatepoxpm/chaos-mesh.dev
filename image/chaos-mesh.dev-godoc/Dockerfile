@@ -1,7 +1,7 @@
-FROM golang:1.17
+FROM golang:1.18
 LABEL org.opencontainers.image.source=https://github.com/STRRL/chaos-mesh.dev
 
-RUN go install github.com/johnstarich/go/gopages@master
+RUN go install github.com/strrl/go/gopages@gopages-support-go-1.18-bypass
 
 RUN mkdir -p /playground
 WORKDIR /playground
